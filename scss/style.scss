@@ -6,13 +6,15 @@ main {
   display: flex;
   width: 100vw;
   height: 100vh;
-  background-color: rgb(209, 209, 209);
+  background-color: rgba(255, 255, 255, 0);
 }
 .disp {
   margin: auto;
   width: 260px;
   height: 440px;
-  background-color: black;
+  background-color: rgb(110, 110, 110);
+
+  border: 1px solid green;
   display: flex;
   border-radius: 20px;
 }
@@ -119,6 +121,10 @@ main {
       }
     }
   }
+  &__bot {
+    display: flex;
+    flex-direction: column;
+  }
 }
 .scr3 {
   display: flex;
@@ -137,4 +143,19 @@ main {
   position: absolute;
   border-radius: 15px;
   background-color: rgb(244, 205, 97);
+}
+.scr4-btn {
+  width: 60px;
+  height: 25px;
+  margin-top: 5px;
+  margin-left: 5px;
+  background-color: rgb(39, 143, 39);
+  border: none;
+  border-radius: 5px;
+}
+canvas {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
 }
