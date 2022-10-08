@@ -7,7 +7,19 @@ import {
   spanCond,
   bntCond,
 } from "./conditioner.js";
-import { scrinTv, backTv } from "./tv";
+import {
+  scrinTv,
+  backTv,
+  btnOn,
+  butTv,
+  chanelBtn,
+  c1,
+  c2,
+  c3,
+  c4,
+} from "./tv.js";
+
+import { backMach, scrinMach, btnWash } from "./WashMach.js";
 
 ("use strict");
 var __extends =
@@ -128,6 +140,7 @@ var TV = /** @class */ (function (_super) {
   };
   return TV;
 })(Room);
+let tvDev = new TV();
 // exports.TV = TV;
 var Chanel;
 (function (Chanel) {
@@ -170,6 +183,7 @@ var WachMachine = /** @class */ (function (_super) {
   return WachMachine;
 })(BathRoom);
 // exports.WachMachine = WachMachine;
+let WasDev = new WachMachine();
 
 let ConditionerDev = new Conditioner();
 
@@ -192,45 +206,46 @@ function scrin() {
   var btn = document.createElement("button");
   btn.classList.add("btn");
   btn.textContent = "Start";
-
+  // рендер домашней страницы
   btn.addEventListener("click", function () {
     scrin.appendChild(scrin2);
   });
+  // возврат на главную страницу
   back.addEventListener("click", function () {
     scrin.removeChild(scrin2);
   });
+  // домашняя => гостинная
   livingRoom.addEventListener("click", function () {
     scrin.removeChild(scrin2);
     scrin.appendChild(scrinLivRoom);
   });
-  bathRoom.addEventListener("click", function () {
-    scrin.removeChild(scrin2);
-    scrin.appendChild();
-  });
+
+  // гостинная => домашняя
   backLiv.addEventListener("click", function () {
     scrin.removeChild(scrinLivRoom);
     scrin.appendChild(scrin2);
   });
+  // гостинная => кондиционер
   conditioner.addEventListener("click", function () {
     scrin.removeChild(scrinLivRoom);
     scrin.appendChild(scrinConditioner);
   });
+  // гостинная => ТВ
   tv.addEventListener("click", function () {
     scrin.removeChild(scrinLivRoom);
     scrin.appendChild(scrinTv);
   });
+  // ТВ => гостинная
   backTv.addEventListener("click", function () {
     scrin.removeChild(scrinTv);
     scrin.appendChild(scrinLivRoom);
   });
-  tv.addEventListener("click", function () {
-    scrin.removeChild(scrinLivRoom);
-    scrin.appendChild();
-  });
+  // кондиционер => гостинная
   backCond.addEventListener("click", function () {
     scrin.removeChild(scrinConditioner);
     scrin.appendChild(scrinLivRoom);
   });
+  // кондиционер, изменение температуры
   function ConditionerValueAdd() {
     spanCond.textContent = `Температура: ${ConditionerDev.temperature}`;
     bntCond.addEventListener("click", function () {
@@ -262,9 +277,47 @@ function scrin() {
       console.log("Температура: " + ConditionerDev.temperature);
     });
   }
-  ConditionerValueAdd();
+  // ТВ, выбор канала
+  function TvAddChanel() {
+    btnOn.addEventListener("click", function () {
+      butTv.appendChild(chanelBtn);
 
+      function AddChanelTv(a, b) {
+        a.addEventListener("click", function () {
+          tvDev.ChanelClick(b);
+        });
+      }
+      AddChanelTv(c1, 1);
+      AddChanelTv(c2, 2);
+      AddChanelTv(c3, 3);
+      AddChanelTv(c4, 4);
+    });
+  }
+  // домашняя => Стиралка
+  bathRoom.addEventListener("click", function () {
+    scrin.removeChild(scrin2);
+    scrin.appendChild(scrinMach);
+  });
+  // стиралка => домашняя
+  backMach.addEventListener("click", function () {
+    scrin.removeChild(scrinMach);
+    scrin.appendChild(scrin2);
+  });
+  // стиралка, выбор режима
+  function WashAddMode() {
+    btnWash.addEventListener("click", function () {
+      let m = +prompt("выберете режим от 1 до 3");
+      WasDev.mode(m);
+    });
+  }
+  setInterval(ConditionerValueAdd, 500);
+
+  TvAddChanel();
+  WashAddMode();
+
+  // переменная в кондиционере
   inpCond.textContent = scrin.appendChild(divBlock);
+
   divBlock.appendChild(div);
   divBlock.appendChild(btn);
   div.appendChild(span);

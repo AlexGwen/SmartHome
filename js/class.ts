@@ -42,7 +42,7 @@ export class Conditioner extends Room {
     super();
     this.controller(this.temperature, this.value);
   }
-  controller(a: any, b: any) {}
+  controller() {}
 }
 export class TV extends Room {
   ChanelClick(a) {
