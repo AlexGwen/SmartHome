@@ -246,8 +246,10 @@ function scrin() {
     scrin.appendChild(scrinLivRoom);
   });
   // кондиционер, изменение температуры
-  function ConditionerValueAdd() {
+  function scrTemp() {
     spanCond.textContent = `Температура: ${ConditionerDev.temperature}`;
+  }
+  function ConditionerValueAdd() {
     bntCond.addEventListener("click", function () {
       ConditionerDev.value = inpCond.value;
       console.log("Заданная температура: " + ConditionerDev.value);
@@ -310,8 +312,9 @@ function scrin() {
       WasDev.mode(m);
     });
   }
-  setInterval(ConditionerValueAdd, 500);
+  setInterval(scrTemp, 200);
 
+  ConditionerValueAdd();
   TvAddChanel();
   WashAddMode();
 
