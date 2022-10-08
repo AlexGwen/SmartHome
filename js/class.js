@@ -7,6 +7,7 @@ import {
   spanCond,
   bntCond,
 } from "./conditioner.js";
+import { scrinTv, backTv } from "./tv";
 
 ("use strict");
 var __extends =
@@ -216,6 +217,14 @@ function scrin() {
   });
   tv.addEventListener("click", function () {
     scrin.removeChild(scrinLivRoom);
+    scrin.appendChild(scrinTv);
+  });
+  backTv.addEventListener("click", function () {
+    scrin.removeChild(scrinTv);
+    scrin.appendChild(scrinLivRoom);
+  });
+  tv.addEventListener("click", function () {
+    scrin.removeChild(scrinLivRoom);
     scrin.appendChild();
   });
   backCond.addEventListener("click", function () {
@@ -226,7 +235,7 @@ function scrin() {
     spanCond.textContent = `Температура: ${ConditionerDev.temperature}`;
     bntCond.addEventListener("click", function () {
       ConditionerDev.value = inpCond.value;
-      console.log(ConditionerDev.value);
+      console.log("Заданная температура: " + ConditionerDev.value);
       // ConditionerDev.controller(this.temperature, this.value);
       function qq() {
         if (ConditionerDev.temperature > ConditionerDev.value) {
@@ -250,7 +259,7 @@ function scrin() {
         }
       }
       qq();
-      console.log(ConditionerDev.temperature);
+      console.log("Температура: " + ConditionerDev.temperature);
     });
   }
   ConditionerValueAdd();
